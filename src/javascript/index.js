@@ -1,51 +1,42 @@
 $(document).ready(function() {
-    
-    solicitudes = [
-        solicitud = {
-            "id": 1,
-            "nombre": "Juan",
-            "apellido": "Secreto"
-        },
-        solicitud = {
-            "id": 1,
-            "nombre": "Alvaro",
-            "apellido": "Rueda"
-        },
-        solicitud = {
-            "id": 1,
-            "nombre": "Alfredo",
-            "apellido": "Galvan"
-        }];
-    
+  let solicitudes = [{
+      "id": 1, 
+      "nombre": "Juan",
+      "apellido": "Secreto"
+  }, {
+      "id": 2, 
+      "nombre": "Antonio",
+      "apellido": "Pero"
+  }, {
+      "id": 3, 
+      "nombre": "de la Encarnación",
+      "apellido": "No tanto"
+  }];
 
-    for(i=0; i < solicitudes.length; i++){
-        $("#maestro").append(
-            $("<li>").text(solicitudes[i].nombre + ' ' + solicitudes[i].apellido)
-        );
-    }
 
-    
-    $("#id").val(solicitud.id); // Fijaria el valor
-    $('#nombre').val(solicitud.nombre);
-    $('#apellido').val(solicitud.apellido);
+  for (i = 0 ; i < solicitudes.length; i++ ) {
+      $("#maestro").append(
+          $("<li>")
+              .text(solicitudes[i].nombre + ' ' + solicitudes[i].apellido)
+              .val(solicitudes[i])
+              .attr("id", "id" + solicitudes[i].id)
+      );
+  }
 
-    $("li").on("click", function() {
-        if($("#detalle").is(":visible")){
-            $("#detalle").hide(); 
-        } else{ 
-            $("#detalle").hide();
-        }
-        
-    })
 
+
+  $("li").on("click", function(event) {
+      if ($("#detalle").is(':visible')) {
+          $("#detalle").hide();
+      } else {
+          $("#detalle").show();
+
+          let solicitud = $(this).attr("id");
+
+          $("#id").val(solicitud);
+          $("#nombre").val("Juan"  + solicitud);
+          $("#apellido").val("Secreto" + solicitud);            
+      }
+      
+  })
 });
-
-
-/*document.getElementById('boton').onclick = function() {
-    alert('Me ha presionado... me voy de vacaciones a relajarme');
-}
-document.getElementById('boton').onclick = function() {
-    this.innerText = 'Ya me ha comido <br> En otra linea';
-}
-
-console.log('Hola mundo... tercera vez');*/
